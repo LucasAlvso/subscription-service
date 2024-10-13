@@ -1,8 +1,8 @@
 package org.projarq.application.use_cases.aplicativos;
 
 import org.projarq.domain.entities.Aplicativo;
-import org.projarq.domain.entities.assinatura.Assinatura;
-import org.projarq.domain.data_access.BuscarAplicativosDataAccess;
+import org.projarq.domain.entities.Assinatura;
+import org.projarq.domain.data_access.aplicativos.BuscarAplicativosDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

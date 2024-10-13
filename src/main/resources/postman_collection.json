@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "e35170b4-01e3-4786-b785-7bfdf4d687a4",
+		"name": "Projarq T1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29632261"
+	},
+	"item": [
+		{
+			"name": "GET /servcad/clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servcad/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /servcad/aplicativos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servcad/aplicativos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"aplicativos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /servcad/assinaturas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigoCliente\": 4,\r\n    \"codigoAplicativo\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/servcad/assinaturas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"assinaturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /servcad/aplicativos/atualizacusto/:idAplicativo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"custo\": 4.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/servcad/aplicativos/atualizacusto/:idAplicativo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"aplicativos",
+						"atualizacusto",
+						":idAplicativo"
+					],
+					"variable": [
+						{
+							"key": "idAplicativo",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /servcad/assinaturas/{tipo}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servcad/assinaturas/:tipo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"assinaturas",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": "ATIVA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /servcad/asscli/:codcli",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servcad/asscli/:codcliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"asscli",
+						":codcliente"
+					],
+					"variable": [
+						{
+							"key": "codcliente",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /servcad/assapp/:codapp",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servcad/assapp/:codapplicativo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servcad",
+						"assapp",
+						":codapplicativo"
+					],
+					"variable": [
+						{
+							"key": "codapplicativo",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /registrarpagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dia\": 13,\r\n    \"mes\": 10,\r\n    \"ano\": 2024,\r\n    \"valorPago\": 16,\r\n    \"codass\": 14\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/registrarpagamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registrarpagamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /assinvalida/:codass",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assinvalida/:codassinatura",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assinvalida",
+						":codassinatura"
+					],
+					"variable": [
+						{
+							"key": "codassinatura",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,10 +1,8 @@
 package org.projarq.adapters.controllers.assinaturas;
 
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.projarq.application.use_cases.assinaturas.AtualizarAssinaturas;
-import org.projarq.domain.data_access.assinaturas.StatusAssinaturaFilter;
 import org.projarq.application.use_cases.assinaturas.BuscarAssinaturas;
-import org.projarq.domain.entities.assinatura.EStatusAssinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
@@ -44,7 +42,7 @@ public class AssinaturaController
 	@GetMapping("/servcad/assinaturas/{status}")
 	public List<Assinatura> getAssinaturasPorStatus(@PathVariable @NonNull String status)
 	{
-		return buscarAssinaturas.findAllByFilter(StatusAssinaturaFilter.convertFromLocalized(status));
+		return buscarAssinaturas.findAllByFilter(status);
 	}
 
 	@GetMapping("/servcad/asscli/{codCliente}")
@@ -65,7 +63,7 @@ public class AssinaturaController
 
 		Assinatura assinatura = foundSubscription.get();
 
-		return assinatura.status() == EStatusAssinatura.ATIVA;
+		return "ATIVA".equalsIgnoreCase(assinatura.status());
 	}
 
 

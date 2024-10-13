@@ -1,13 +1,13 @@
 package org.projarq.domain.data_access.assinaturas;
 
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BuscarAssinaturasDataAccess
 {
-	List<Assinatura> getAssinaturas(StatusAssinaturaFilter filtro);
+	List<Assinatura> getAssinaturas(String status);
 	List<Assinatura> getAssinaturasPorCliente(long codCliente);
 
 	List<Assinatura> findAll();

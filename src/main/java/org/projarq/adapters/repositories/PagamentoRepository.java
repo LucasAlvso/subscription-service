@@ -1,10 +1,10 @@
 package org.projarq.adapters.repositories;
 
-import org.projarq.domain.data_access.RegistrarPagamentoDataAccess;
+import org.projarq.domain.data_access.pagamentos.RegistrarPagamentoDataAccess;
 import org.projarq.adapters.jpa.entities.PagamentoJpaEntity;
 import org.projarq.adapters.jpa.entities.AssinaturaJpaEntity;
 import org.projarq.adapters.jpa.jpa_repositories.PagamentoJpaRepository;
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

@@ -3,7 +3,7 @@ package org.projarq.adapters.controllers.aplicativos;
 import org.projarq.application.use_cases.aplicativos.BuscarAplicativos;
 import org.projarq.domain.entities.Aplicativo;
 import org.projarq.application.use_cases.aplicativos.AtualizarAplicativos;
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;

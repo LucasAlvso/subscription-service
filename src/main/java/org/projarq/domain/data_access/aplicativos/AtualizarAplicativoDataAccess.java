@@ -1,10 +1,8 @@
-package org.projarq.domain.data_access;
+package org.projarq.domain.data_access.aplicativos;
 
 import org.projarq.domain.entities.Aplicativo;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 public interface AtualizarAplicativoDataAccess

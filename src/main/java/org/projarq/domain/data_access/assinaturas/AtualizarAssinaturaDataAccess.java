@@ -1,6 +1,6 @@
-package org.projarq.domain.data_access;
+package org.projarq.domain.data_access.assinaturas;
 
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

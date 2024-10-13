@@ -1,9 +1,9 @@
 package org.projarq.application.use_cases.pagamentos;
 
 import org.projarq.domain.data_access.assinaturas.BuscarAssinaturasDataAccess;
-import org.projarq.domain.data_access.RegistrarPagamentoDataAccess;
-import org.projarq.domain.data_access.AtualizarAssinaturaDataAccess;
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.data_access.pagamentos.RegistrarPagamentoDataAccess;
+import org.projarq.domain.data_access.assinaturas.AtualizarAssinaturaDataAccess;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

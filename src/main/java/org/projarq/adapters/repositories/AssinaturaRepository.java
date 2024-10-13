@@ -1,15 +1,14 @@
 package org.projarq.adapters.repositories;
 
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.projarq.adapters.jpa.entities.AplicativoJpaEntity;
 import org.projarq.adapters.jpa.entities.ClienteJpaEntity;
 import org.projarq.adapters.jpa.entities.AssinaturaJpaEntity;
 import org.projarq.adapters.jpa.jpa_repositories.AplicativoJpaRepository;
 import org.projarq.adapters.jpa.jpa_repositories.ClienteJpaRepository;
 import org.projarq.adapters.jpa.jpa_repositories.AssinaturaJpaRepository;
-import org.projarq.domain.data_access.CriarAssinaturaDataAccess;
-import org.projarq.domain.data_access.AtualizarAssinaturaDataAccess;
-import org.projarq.domain.data_access.assinaturas.StatusAssinaturaFilter;
+import org.projarq.domain.data_access.assinaturas.CriarAssinaturaDataAccess;
+import org.projarq.domain.data_access.assinaturas.AtualizarAssinaturaDataAccess;
 import org.projarq.domain.data_access.assinaturas.BuscarAssinaturasDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -59,9 +58,9 @@ public class AssinaturaRepository implements CriarAssinaturaDataAccess, BuscarAs
     }
 
     @Override
-    public @NonNull List<Assinatura> getAssinaturas(@NonNull StatusAssinaturaFilter filtro)
+    public @NonNull List<Assinatura> getAssinaturas(@NonNull String status)
     {
-        return assinaturaJpaRepository.getAssinaturasPorStatus(filtro.toString())
+        return assinaturaJpaRepository.getAssinaturasPorStatus(status)
                                         .stream()
                                         .map(AssinaturaJpaEntity::parseParaDomainEntity)
                                         .toList();

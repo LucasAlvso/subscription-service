@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.projarq.adapters.jpa.ParseableToDomainEntity;
-import org.projarq.domain.entities.assinatura.Assinatura;
-import org.projarq.domain.entities.assinatura.EStatusAssinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
@@ -29,10 +28,9 @@ public class AssinaturaJpaEntity implements ParseableToDomainEntity<Assinatura>
 				       );
 	}
 
-	public @NonNull EStatusAssinatura getStatus()
+	public @NonNull String getStatus()
 	{
-        return LocalDate.now().isAfter(fimVigencia) ? EStatusAssinatura.CANCELADA
-												: EStatusAssinatura.ATIVA;
+        return LocalDate.now().isAfter(fimVigencia) ? "CANCELADA" : "ATIVA";
 	}
 
 

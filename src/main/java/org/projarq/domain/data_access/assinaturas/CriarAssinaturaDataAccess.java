@@ -1,6 +1,6 @@
-package org.projarq.domain.data_access;
+package org.projarq.domain.data_access.assinaturas;
 
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 
 import java.time.LocalDate;
 

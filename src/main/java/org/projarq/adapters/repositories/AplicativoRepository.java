@@ -2,11 +2,11 @@ package org.projarq.adapters.repositories;
 
 import org.projarq.adapters.jpa.entities.AssinaturaJpaEntity;
 import org.projarq.domain.entities.Aplicativo;
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.entities.Assinatura;
 import org.projarq.adapters.jpa.entities.AplicativoJpaEntity;
 import org.projarq.adapters.jpa.jpa_repositories.AplicativoJpaRepository;
-import org.projarq.domain.data_access.AtualizarAplicativoDataAccess;
-import org.projarq.domain.data_access.BuscarAplicativosDataAccess;
+import org.projarq.domain.data_access.aplicativos.AtualizarAplicativoDataAccess;
+import org.projarq.domain.data_access.aplicativos.BuscarAplicativosDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

@@ -14,8 +14,15 @@ public interface AssinaturaJpaRepository extends JpaRepository<AssinaturaJpaEnti
 	List<AssinaturaJpaEntity> getAssinaturasPorCliente(long codCliente);
 
 	@Query("SELECT s FROM AssinaturaJpaEntity s " +
-	       "WHERE s.fimVigencia >= CURRENT_DATE AND s.inicioVigencia <= CURRENT_DATE AND :status = 'ATIVA' " +
-	       "OR s.fimVigencia < CURRENT_DATE AND :status = 'CANCELADA' " +
-	       "OR :status = 'TODAS'")
+			"WHERE " +
+			"  (CASE " +
+			"     WHEN :status = 'ATIVAS' THEN " +
+			"       (s.fimVigencia >= CURRENT_DATE AND s.inicioVigencia <= CURRENT_DATE) " +
+			"     WHEN :status = 'CANCELADAS' THEN " +
+			"       (s.fimVigencia < CURRENT_DATE) " +
+			"     WHEN :status = 'TODAS' THEN " +
+			"       TRUE " +
+			"     ELSE FALSE " +
+			"   END)")
 	List<AssinaturaJpaEntity> getAssinaturasPorStatus(String status);
 }

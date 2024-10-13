@@ -1,7 +1,7 @@
 package org.projarq.application.use_cases.assinaturas;
 
-import org.projarq.domain.data_access.CriarAssinaturaDataAccess;
-import org.projarq.domain.entities.assinatura.Assinatura;
+import org.projarq.domain.data_access.assinaturas.CriarAssinaturaDataAccess;
+import org.projarq.domain.entities.Assinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

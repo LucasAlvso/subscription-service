@@ -1,7 +1,4 @@
-package org.projarq.domain.entities.assinatura;
-
-import org.projarq.domain.entities.Aplicativo;
-import org.projarq.domain.entities.Cliente;
+package org.projarq.domain.entities;
 
 import java.time.LocalDate;
 
@@ -12,6 +9,6 @@ public record Assinatura
 	Cliente cliente,
 	LocalDate inicioVigencia,
 	LocalDate fimVigencia,
-	EStatusAssinatura status
+	String status
 )
 { }

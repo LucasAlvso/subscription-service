@@ -1,4 +1,4 @@
-package org.projarq.domain.data_access;
+package org.projarq.domain.data_access.clientes;
 
 import org.projarq.domain.entities.Cliente;
 
