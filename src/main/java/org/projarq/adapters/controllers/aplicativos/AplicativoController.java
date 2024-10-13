@@ -25,7 +25,7 @@ public class AplicativoController
 		this.atualizarAplicativos = atualizarAplicativos;
 	}
 
-	@GetMapping()
+	@GetMapping("/aplicativos")
 	public List<Aplicativo> getAllAplicativos()
 	{
 		return buscarAplicativos.findAll();
@@ -33,9 +33,9 @@ public class AplicativoController
 
 	@PostMapping("/aplicativos/atualizacusto/{codAplicativo}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public @NonNull Aplicativo atualizarCustoDeAplicativo(@PathVariable long codAplicativo, @NonNull @RequestBody AtualizarCustoDTO newCost)
+	public @NonNull Aplicativo atualizarCustoDeAplicativo(@PathVariable long codAplicativo, @NonNull @RequestBody AtualizarCustoDTO novoCusto)
 	{
-		return atualizarAplicativos.atualizarCustoAplicativo(codAplicativo, newCost.custo());
+		return atualizarAplicativos.atualizarCustoAplicativo(codAplicativo, novoCusto.custo());
 	}
 
 	@GetMapping("/assapp/{codAplicativo}")
