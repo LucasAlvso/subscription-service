@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @Component
 public class PagamentoRepository implements RegistrarPagamentoDataAccess
 {
+
+    private final PagamentoJpaRepository pagamentoJpaRepository;
+
     @Autowired
     public PagamentoRepository(PagamentoJpaRepository pagamentoJpaRepository)
     {
@@ -32,5 +35,4 @@ public class PagamentoRepository implements RegistrarPagamentoDataAccess
         pagamentoJpaRepository.save(payment);
     }
 
-    private final PagamentoJpaRepository pagamentoJpaRepository;
 }

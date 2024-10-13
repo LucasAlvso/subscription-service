@@ -13,6 +13,8 @@ import java.util.List;
 @Component
 public class ClienteRepository implements BuscarClientesDataAccess
 {
+
+	private final ClienteJpaRepository clienteJpaRepository;
 	@Autowired
 	public ClienteRepository(ClienteJpaRepository clienteJpaRepository)
 	{
@@ -28,5 +30,4 @@ public class ClienteRepository implements BuscarClientesDataAccess
 								    .toList();
 	}
 
-	private final ClienteJpaRepository clienteJpaRepository;
 }

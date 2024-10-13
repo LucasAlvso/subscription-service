@@ -18,6 +18,9 @@ import java.util.Optional;
 @Component
 public class AplicativoRepository implements AtualizarAplicativoDataAccess, BuscarAplicativosDataAccess
 {
+
+	private final AplicativoJpaRepository aplicativoJpaRepository;
+
 	@Autowired
 	public AplicativoRepository(AplicativoJpaRepository aplicativoJpaRepository)
 	{
@@ -61,6 +64,4 @@ public class AplicativoRepository implements AtualizarAplicativoDataAccess, Busc
 									   .map(AplicativoJpaEntity::parseParaDomainEntity)
 									   .toList();
 	}
-
-	private final AplicativoJpaRepository aplicativoJpaRepository;
 }
