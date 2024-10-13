@@ -12,5 +12,4 @@ public record Pagamento
 	LocalDate dataPagamento,
 	String promocao
 )
-{
-}
+{ }

@@ -27,9 +27,9 @@ public class RegistrarPagamento
 		this.buscarAssinaturasDataAccess = buscarAssinaturasDataAccess;
 	}
 
-	public @NonNull LocalDate registerPayment(LocalDate data, long codAssinatura, @NonNull Double quantidadePaga)
+	public @NonNull LocalDate registrarPagamento(LocalDate data, long codAssinatura, @NonNull Double quantidadePaga)
 	{
-		Optional<Assinatura> assinaturaEncontrada = buscarAssinaturasDataAccess.findById(codAssinatura);
+		Optional<Assinatura> assinaturaEncontrada = buscarAssinaturasDataAccess.getAssinaturaById(codAssinatura);
 
 		if (assinaturaEncontrada.isEmpty())
         {
@@ -44,18 +44,18 @@ public class RegistrarPagamento
 		}
 
 		Double custoMensal = assinatura.aplicativo().custoMensal();
-		if (quantidadePaga.compareTo(custoMensal) != 0)
+		if (!quantidadePaga.equals(custoMensal))
 		{
 			throw new IllegalStateException(String.valueOf(custoMensal));
 		}
 
 		registrarPagamentoDataAccess.registrarPagamento(data, assinatura, quantidadePaga);
 
-		LocalDate dateToUse = assinatura.fimVigencia().isAfter(data) ? assinatura.fimVigencia() : data;
-		LocalDate newEndDate = dateToUse.plusMonths(1);
-		atualizarAssinaturaDataAccess.atualizarFimVigencia(codAssinatura, newEndDate);
+		LocalDate vigenciaAtual = assinatura.fimVigencia().isAfter(data) ? assinatura.fimVigencia() : data;
+		LocalDate novaVigencia = vigenciaAtual.plusMonths(1);
+		atualizarAssinaturaDataAccess.atualizarFimVigencia(codAssinatura, novaVigencia);
 
-		return newEndDate;
+		return novaVigencia;
 	}
 
 }

@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface BuscarAssinaturasDataAccess
 {
-	List<Assinatura> getAssinaturas(ESubscriptionStatusFilter filtro);
+	List<Assinatura> getAssinaturas(StatusAssinaturaFilter filtro);
 	List<Assinatura> getAssinaturasPorCliente(long codCliente);
 
 	List<Assinatura> findAll();
 
-	Optional<Assinatura> findById(long codAssinatura);
+	Optional<Assinatura> getAssinaturaById(long codAssinatura);
 }

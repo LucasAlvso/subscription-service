@@ -1,16 +1,16 @@
 package org.projarq.adapters.jpa.entities;
 
 import jakarta.persistence.*;
+import org.projarq.adapters.jpa.ParseableToDomainEntity;
 import org.projarq.domain.entities.Cliente;
-import org.projarq.adapters.jpa.ConvertibleToDomainEntity;
 import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "clientes")
-public class ClienteJpaEntity implements ConvertibleToDomainEntity<Cliente>
+public class ClienteJpaEntity implements ParseableToDomainEntity<Cliente>
 {
 	@Override
-	public @NonNull Cliente toDomainEntity()
+	public @NonNull Cliente parseParaDomainEntity()
 	{
 		return new Cliente
 				       (
@@ -20,7 +20,7 @@ public class ClienteJpaEntity implements ConvertibleToDomainEntity<Cliente>
 				       );
 	}
 
-	public static @NonNull ClienteJpaEntity fromDomainEntity(@NonNull Cliente cliente)
+	public static @NonNull ClienteJpaEntity parseDeDomainEntity(@NonNull Cliente cliente)
 	{
 		return new ClienteJpaEntity(cliente.codigo(), cliente.nome(), cliente.email());
 	}

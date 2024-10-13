@@ -30,26 +30,26 @@ public class AplicativoRepository implements AtualizarAplicativoDataAccess, Busc
 		{
 			throw new IllegalArgumentException(String.valueOf(custoNovo));
 		}
-        Optional<AplicativoJpaEntity> existingApplication = aplicativoJpaRepository.findById(codAplicativo);
+        Optional<AplicativoJpaEntity> aplicativoExistente = aplicativoJpaRepository.findById(codAplicativo);
 
-        if (existingApplication.isEmpty())
+        if (aplicativoExistente.isEmpty())
         {
             throw new NoSuchElementException(String.valueOf(codAplicativo));
         }
         else
         {
-			AplicativoJpaEntity applicationValue = existingApplication.get();
-            applicationValue.setCustoMensal(custoNovo);
+			AplicativoJpaEntity aplicativo = aplicativoExistente.get();
+            aplicativo.setCustoMensal(custoNovo);
 
-            return aplicativoJpaRepository.save(applicationValue).toDomainEntity();
+            return aplicativoJpaRepository.save(aplicativo).parseParaDomainEntity();
         }
     }
 
 	@Override
 	public @NonNull List<Assinatura> getAssinaturasPorAplicativo(long applicationId)
 	{
-		return aplicativoJpaRepository.getSubscriptionsForApplication(applicationId).stream()
-									   .map(AssinaturaJpaEntity::toDomainEntity)
+		return aplicativoJpaRepository.getAssinaturasPorAplicativo(applicationId).stream()
+									   .map(AssinaturaJpaEntity::parseParaDomainEntity)
 									   .toList();
 	}
 
@@ -58,7 +58,7 @@ public class AplicativoRepository implements AtualizarAplicativoDataAccess, Busc
 	{
 		return aplicativoJpaRepository.findAll()
 									   .stream()
-									   .map(AplicativoJpaEntity::toDomainEntity)
+									   .map(AplicativoJpaEntity::parseParaDomainEntity)
 									   .toList();
 	}
 

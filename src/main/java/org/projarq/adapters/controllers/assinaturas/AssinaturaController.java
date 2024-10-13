@@ -1,9 +1,9 @@
 package org.projarq.adapters.controllers.assinaturas;
 
 import org.projarq.domain.entities.assinatura.Assinatura;
-import org.projarq.application.use_cases.assinaturas.manage_subscriptions.AtualizarAssinaturas;
-import org.projarq.domain.data_access.assinaturas.ESubscriptionStatusFilter;
-import org.projarq.application.use_cases.assinaturas.query_subscription.BuscarAssinaturas;
+import org.projarq.application.use_cases.assinaturas.AtualizarAssinaturas;
+import org.projarq.domain.data_access.assinaturas.StatusAssinaturaFilter;
+import org.projarq.application.use_cases.assinaturas.BuscarAssinaturas;
 import org.projarq.domain.entities.assinatura.EStatusAssinatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,42 +30,42 @@ public class AssinaturaController
 
 	@PostMapping("/servcad/assinaturas")
 	@ResponseStatus(HttpStatus.CREATED)
-	public @NonNull Assinatura createSubscription(@RequestBody @NonNull CriarAssinaturaDTO criarAssinaturaDTO)
+	public @NonNull Assinatura criarAssinatura(@RequestBody @NonNull CriarAssinaturaDTO criarAssinaturaDTO)
 	{
 		return atualizarAssinaturas.criarAssinatura(criarAssinaturaDTO.codigoCliente(), criarAssinaturaDTO.codigoAplicativo());
 	}
 
 	@GetMapping()
-	public List<Assinatura> getAllSubscriptions()
+	public List<Assinatura> getAllAssinaturas()
 	{
 		return buscarAssinaturas.findAll();
 	}
 
-	@GetMapping("/servcad/assinaturas/{filterType}")
-	public List<Assinatura> getAllSubscriptionsByFilter(@PathVariable @NonNull String filterType)
+	@GetMapping("/servcad/assinaturas/{status}")
+	public List<Assinatura> getAssinaturasPorStatus(@PathVariable @NonNull String status)
 	{
-		return buscarAssinaturas.findAllByFilter(ESubscriptionStatusFilter.convertFromLocalized(filterType));
+		return buscarAssinaturas.findAllByFilter(StatusAssinaturaFilter.convertFromLocalized(status));
 	}
 
-	@GetMapping("/servcad/asscli/{customerId}")
-	List<Assinatura> getSubscriptionsForCustomer(@PathVariable long customerId)
+	@GetMapping("/servcad/asscli/{codCliente}")
+	List<Assinatura> getAssinaturasPorCliente(@PathVariable long codCliente)
 	{
-		return buscarAssinaturas.getAssinaturasPorCliente(customerId);
+		return buscarAssinaturas.getAssinaturasPorCliente(codCliente);
 	}
 
-	@GetMapping("/assinvalida/{subscriptionId}")
-	public boolean isSubscriptionValid(@PathVariable long subscriptionId)
+	@GetMapping("/assinvalida/{codAssinatura}")
+	public boolean isAssinaturaValida(@PathVariable long codAssinatura)
 	{
-		Optional<Assinatura> foundSubscription = buscarAssinaturas.findAssinaturaById(subscriptionId);
+		Optional<Assinatura> foundSubscription = buscarAssinaturas.findAssinaturaById(codAssinatura);
 
 		if (foundSubscription.isEmpty())
 		{
-			throw new NoSuchElementException(String.valueOf(subscriptionId));
+			throw new NoSuchElementException(String.valueOf(codAssinatura));
 		}
 
 		Assinatura assinatura = foundSubscription.get();
 
-		return assinatura.status() == EStatusAssinatura.ACTIVE;
+		return assinatura.status() == EStatusAssinatura.ATIVA;
 	}
 
 

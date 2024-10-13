@@ -6,5 +6,4 @@ public record Aplicativo
 	String nome,
 	double custoMensal
 )
-{
-}
+{ }

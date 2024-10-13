@@ -14,5 +14,4 @@ public record Assinatura
 	LocalDate fimVigencia,
 	EStatusAssinatura status
 )
-{
-}
+{ }

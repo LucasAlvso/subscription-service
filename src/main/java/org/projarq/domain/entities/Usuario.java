@@ -5,5 +5,4 @@ public record Usuario
 	String usuario,
 	String senha
 )
-{
-}
+{ }

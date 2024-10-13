@@ -3,26 +3,26 @@ package org.projarq.adapters.jpa.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.projarq.adapters.jpa.ParseableToDomainEntity;
 import org.projarq.domain.entities.assinatura.Assinatura;
 import org.projarq.domain.entities.assinatura.EStatusAssinatura;
-import org.projarq.adapters.jpa.ConvertibleToDomainEntity;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "assinaturas")
-public class AssinaturaJpaEntity implements ConvertibleToDomainEntity<Assinatura>
+public class AssinaturaJpaEntity implements ParseableToDomainEntity<Assinatura>
 {
 	@NonNull
 	@Override
-	public Assinatura toDomainEntity()
+	public Assinatura parseParaDomainEntity()
 	{
 		return new Assinatura
 				       (
 							   codigo,
-						       aplicativo.toDomainEntity(),
-						       cliente.toDomainEntity(),
+						       aplicativo.parseParaDomainEntity(),
+						       cliente.parseParaDomainEntity(),
 							   inicioVigencia,
 							   fimVigencia,
 							   getStatus()
@@ -31,18 +31,18 @@ public class AssinaturaJpaEntity implements ConvertibleToDomainEntity<Assinatura
 
 	public @NonNull EStatusAssinatura getStatus()
 	{
-        return LocalDate.now().isAfter(fimVigencia) ? EStatusAssinatura.CANCELLED
-												: EStatusAssinatura.ACTIVE;
+        return LocalDate.now().isAfter(fimVigencia) ? EStatusAssinatura.CANCELADA
+												: EStatusAssinatura.ATIVA;
 	}
 
 
 
-	public static @NonNull AssinaturaJpaEntity fromDomainEntity(@NonNull Assinatura assinatura)
+	public static @NonNull AssinaturaJpaEntity parseDeDomainEntity(@NonNull Assinatura assinatura)
 	{
 		return new AssinaturaJpaEntity(
 			assinatura.codigo(),
-			AplicativoJpaEntity.fromDomainEntity(assinatura.aplicativo()),
-			ClienteJpaEntity.fromDomainEntity(assinatura.cliente()),
+			AplicativoJpaEntity.parseDeDomainEntity(assinatura.aplicativo()),
+			ClienteJpaEntity.parseDeDomainEntity(assinatura.cliente()),
 			assinatura.inicioVigencia(),
 			assinatura.fimVigencia()
 		);

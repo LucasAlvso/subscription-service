@@ -28,7 +28,7 @@ public class PagamentoRepository implements RegistrarPagamentoDataAccess
             throw new IllegalArgumentException(String.valueOf(quantidadePaga));
         }
 
-        PagamentoJpaEntity payment = new PagamentoJpaEntity(AssinaturaJpaEntity.fromDomainEntity(assinatura), quantidadePaga, paymentDate, "none");
+        PagamentoJpaEntity payment = new PagamentoJpaEntity(AssinaturaJpaEntity.parseDeDomainEntity(assinatura), quantidadePaga, paymentDate, "none");
         pagamentoJpaRepository.save(payment);
     }
 

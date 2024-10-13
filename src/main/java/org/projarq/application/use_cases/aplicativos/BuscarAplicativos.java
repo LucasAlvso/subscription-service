@@ -1,4 +1,4 @@
-package org.projarq.application.use_cases.aplicativos.query_applications;
+package org.projarq.application.use_cases.aplicativos;
 
 import org.projarq.domain.entities.Aplicativo;
 import org.projarq.domain.entities.assinatura.Assinatura;
@@ -12,15 +12,16 @@ import java.util.List;
 @Component
 public class BuscarAplicativos
 {
+	private final BuscarAplicativosDataAccess buscarAplicativosDataAccess;
 	@Autowired
 	public BuscarAplicativos(BuscarAplicativosDataAccess buscarAplicativosDataAccess)
 	{
 		this.buscarAplicativosDataAccess = buscarAplicativosDataAccess;
 	}
 
-	public @NonNull List<Assinatura> getSubscriptionsForApplication(long applicationId)
+	public @NonNull List<Assinatura> getAssinaturasPorAplicativo(long codAplicativo)
 	{
-		return buscarAplicativosDataAccess.getAssinaturasPorAplicativo(applicationId);
+		return buscarAplicativosDataAccess.getAssinaturasPorAplicativo(codAplicativo);
 	}
 
 	public List<Aplicativo> findAll()
@@ -28,5 +29,4 @@ public class BuscarAplicativos
 		return buscarAplicativosDataAccess.findAll();
 	}
 
-	private final BuscarAplicativosDataAccess buscarAplicativosDataAccess;
 }

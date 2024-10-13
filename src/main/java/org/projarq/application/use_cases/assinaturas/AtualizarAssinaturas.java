@@ -1,4 +1,4 @@
-package org.projarq.application.use_cases.assinaturas.manage_subscriptions;
+package org.projarq.application.use_cases.assinaturas;
 
 import org.projarq.domain.data_access.CriarAssinaturaDataAccess;
 import org.projarq.domain.entities.assinatura.Assinatura;
@@ -21,9 +21,7 @@ public class AtualizarAssinaturas
 
 	public Assinatura criarAssinatura(long codCliente, long codAplicativo)
 	{
-        LocalDate now = LocalDate.now();
-
-        return criarAssinaturaDataAccess.criarAssinatura(codCliente, codAplicativo, now, now.plusDays(7));
+        return criarAssinaturaDataAccess.criarAssinatura(codCliente, codAplicativo, LocalDate.now(), LocalDate.now().plusDays(7));
 	}
 
 }

@@ -1,24 +1,14 @@
 package org.projarq.adapters.jpa.entities;
 
 import jakarta.persistence.*;
+import org.projarq.adapters.jpa.ParseableToDomainEntity;
 import org.projarq.domain.entities.Usuario;
-import org.projarq.adapters.jpa.ConvertibleToDomainEntity;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "usuarios")
-public class UsuarioJpaEntity implements ConvertibleToDomainEntity<Usuario>
+public class UsuarioJpaEntity
 {
-	@NonNull
-	@Override
-	public Usuario toDomainEntity()
-	{
-		return new Usuario(usuario, senha);
-	}
-
-	protected UsuarioJpaEntity() {}
-
-
+	//Classe apenas para a criação automática do DDL
 	@Column(nullable = false)
 	@Id
 	private String usuario;

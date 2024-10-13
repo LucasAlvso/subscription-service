@@ -12,5 +12,5 @@ import java.util.List;
 public interface AplicativoJpaRepository extends JpaRepository<AplicativoJpaEntity, Long>
 {
 	@Query("SELECT s FROM AssinaturaJpaEntity s WHERE s.aplicativo.codAplicativo = :codAplicativo")
-	List<AssinaturaJpaEntity> getSubscriptionsForApplication(long codAplicativo);
+	List<AssinaturaJpaEntity> getAssinaturasPorAplicativo(long codAplicativo);
 }

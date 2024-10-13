@@ -9,7 +9,7 @@ import org.projarq.adapters.jpa.jpa_repositories.ClienteJpaRepository;
 import org.projarq.adapters.jpa.jpa_repositories.AssinaturaJpaRepository;
 import org.projarq.domain.data_access.CriarAssinaturaDataAccess;
 import org.projarq.domain.data_access.AtualizarAssinaturaDataAccess;
-import org.projarq.domain.data_access.assinaturas.ESubscriptionStatusFilter;
+import org.projarq.domain.data_access.assinaturas.StatusAssinaturaFilter;
 import org.projarq.domain.data_access.assinaturas.BuscarAssinaturasDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -23,6 +23,11 @@ import java.util.Optional;
 @Repository
 public class AssinaturaRepository implements CriarAssinaturaDataAccess, BuscarAssinaturasDataAccess, AtualizarAssinaturaDataAccess
 {
+
+    private final AssinaturaJpaRepository assinaturaJpaRepository;
+    private final ClienteJpaRepository clienteJpaRepository;
+    private final AplicativoJpaRepository aplicativoJpaRepository;
+
     @Autowired
     public AssinaturaRepository(AssinaturaJpaRepository assinaturaJpaRepository, ClienteJpaRepository clienteJpaRepository, AplicativoJpaRepository aplicativoJpaRepository)
     {
@@ -32,7 +37,7 @@ public class AssinaturaRepository implements CriarAssinaturaDataAccess, BuscarAs
     }
 
     @Override
-    public @NonNull Assinatura criarAssinatura(long customerId, long applicationId, LocalDate startDate, LocalDate endDate)
+    public @NonNull Assinatura criarAssinatura(long customerId, long applicationId, LocalDate vigenciaInicial, LocalDate vigenciaFinal)
     {
         Optional<AplicativoJpaEntity> aplicativo = aplicativoJpaRepository.findById(applicationId);
 
@@ -48,32 +53,26 @@ public class AssinaturaRepository implements CriarAssinaturaDataAccess, BuscarAs
             throw new NoSuchElementException(String.valueOf(customerId));
         }
 
-        AssinaturaJpaEntity assinatura = new AssinaturaJpaEntity
-        (
-            aplicativo.get(),
-            cliente.get(),
-            startDate,
-            endDate
-        );
+        AssinaturaJpaEntity assinatura = new AssinaturaJpaEntity(aplicativo.get(), cliente.get(), vigenciaInicial, vigenciaFinal);
 
-        return assinaturaJpaRepository.save(assinatura).toDomainEntity();
+        return assinaturaJpaRepository.save(assinatura).parseParaDomainEntity();
     }
 
     @Override
-    public @NonNull List<Assinatura> getAssinaturas(@NonNull ESubscriptionStatusFilter filtro)
+    public @NonNull List<Assinatura> getAssinaturas(@NonNull StatusAssinaturaFilter filtro)
     {
-        return assinaturaJpaRepository.querySubscriptions(filtro.toString())
+        return assinaturaJpaRepository.getAssinaturasPorStatus(filtro.toString())
                                         .stream()
-                                        .map(AssinaturaJpaEntity::toDomainEntity)
+                                        .map(AssinaturaJpaEntity::parseParaDomainEntity)
                                         .toList();
     }
 
     @Override
     public @NonNull List<Assinatura> getAssinaturasPorCliente(long codCliente)
     {
-        return assinaturaJpaRepository.getSubscriptionsForCustomer(codCliente)
+        return assinaturaJpaRepository.getAssinaturasPorCliente(codCliente)
                                         .stream()
-                                        .map(AssinaturaJpaEntity::toDomainEntity)
+                                        .map(AssinaturaJpaEntity::parseParaDomainEntity)
                                         .toList();
     }
 
@@ -82,32 +81,28 @@ public class AssinaturaRepository implements CriarAssinaturaDataAccess, BuscarAs
     {
         return assinaturaJpaRepository.findAll()
                                         .stream()
-                                        .map(AssinaturaJpaEntity::toDomainEntity)
+                                        .map(AssinaturaJpaEntity::parseParaDomainEntity)
                                         .toList();
     }
 
     @Override
-    public @NonNull Optional<Assinatura> findById(long codAssinatura)
+    public @NonNull Optional<Assinatura> getAssinaturaById(long codAssinatura)
     {
-        return assinaturaJpaRepository.findById(codAssinatura).map(AssinaturaJpaEntity::toDomainEntity);
+        return assinaturaJpaRepository.findById(codAssinatura).map(AssinaturaJpaEntity::parseParaDomainEntity);
     }
-
-    private final AssinaturaJpaRepository assinaturaJpaRepository;
-    private final ClienteJpaRepository clienteJpaRepository;
-    private final AplicativoJpaRepository aplicativoJpaRepository;
 
     @Override
     public @NonNull Assinatura atualizarFimVigencia(long codAssinatura, LocalDate novaVigencia)
     {
-        Optional<AssinaturaJpaEntity> existingSubscription = assinaturaJpaRepository.findById(codAssinatura);
-        if (existingSubscription.isEmpty())
+        Optional<AssinaturaJpaEntity> assinaturaExistente = assinaturaJpaRepository.findById(codAssinatura);
+        if (assinaturaExistente.isEmpty())
         {
             throw new NoSuchElementException(String.valueOf(codAssinatura));
         }
 
-        AssinaturaJpaEntity subscription = existingSubscription.get();
-        subscription.setFimVigencia(novaVigencia);
+        AssinaturaJpaEntity assinaturaNova = assinaturaExistente.get();
+        assinaturaNova.setFimVigencia(novaVigencia);
 
-        return assinaturaJpaRepository.save(subscription).toDomainEntity();
+        return assinaturaJpaRepository.save(assinaturaNova).parseParaDomainEntity();
     }
 }

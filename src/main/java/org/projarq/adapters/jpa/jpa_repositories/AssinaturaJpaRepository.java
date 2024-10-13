@@ -11,11 +11,11 @@ import java.util.List;
 public interface AssinaturaJpaRepository extends JpaRepository<AssinaturaJpaEntity, Long>
 {
 	@Query("SELECT s FROM AssinaturaJpaEntity s WHERE s.cliente.codCliente = :codCliente")
-	List<AssinaturaJpaEntity> getSubscriptionsForCustomer(long codCliente);
+	List<AssinaturaJpaEntity> getAssinaturasPorCliente(long codCliente);
 
 	@Query("SELECT s FROM AssinaturaJpaEntity s " +
-	       "WHERE s.fimVigencia >= CURRENT_DATE AND s.inicioVigencia <= CURRENT_DATE AND :filtro = 'ACTIVE' " +
-	       "OR s.fimVigencia < CURRENT_DATE AND :filtro = 'CANCELLED' " +
-	       "OR :filtro = 'ALL'")
-	List<AssinaturaJpaEntity> querySubscriptions(String filtro);
+	       "WHERE s.fimVigencia >= CURRENT_DATE AND s.inicioVigencia <= CURRENT_DATE AND :status = 'ATIVA' " +
+	       "OR s.fimVigencia < CURRENT_DATE AND :status = 'CANCELADA' " +
+	       "OR :status = 'TODAS'")
+	List<AssinaturaJpaEntity> getAssinaturasPorStatus(String status);
 }

@@ -24,7 +24,7 @@ public class ClienteRepository implements BuscarClientesDataAccess
 	{
 		return clienteJpaRepository.findAll()
 								    .stream()
-								    .map(ClienteJpaEntity::toDomainEntity)
+								    .map(ClienteJpaEntity::parseParaDomainEntity)
 								    .toList();
 	}
 

@@ -1,38 +1,21 @@
 package org.projarq.adapters.jpa.entities;
 
 import jakarta.persistence.*;
+import org.projarq.adapters.jpa.ParseableToDomainEntity;
 import org.projarq.domain.entities.Pagamento;
-import org.projarq.adapters.jpa.ConvertibleToDomainEntity;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "pagamentos")
-public class PagamentoJpaEntity implements ConvertibleToDomainEntity<Pagamento>
+public class PagamentoJpaEntity implements ParseableToDomainEntity<Pagamento>
 {
 	@NonNull
 	@Override
-	public Pagamento toDomainEntity()
+	public Pagamento parseParaDomainEntity()
 	{
-		return new Pagamento
-		(
-				codigo,
-			assinatura.toDomainEntity(),
-				valorPago,
-				dataPagamento,
-			promocao
-		);
-	}
-
-	public static @NonNull PagamentoJpaEntity fromDomainEntity(@NonNull Pagamento pagamento)
-	{
-		return new PagamentoJpaEntity(pagamento.codigo(), AssinaturaJpaEntity.fromDomainEntity(pagamento.assinatura()), pagamento.valorPago(), pagamento.dataPagamento(), pagamento.promocao());
-	}
-
-	public Long getCodigo()
-	{
-		return codigo;
+		return new Pagamento(codigo, assinatura.parseParaDomainEntity(), valorPago, dataPagamento, promocao);
 	}
 
 	public PagamentoJpaEntity(AssinaturaJpaEntity assinatura, Double valorPago, LocalDate dataPagamento, String promocao)
@@ -41,18 +24,6 @@ public class PagamentoJpaEntity implements ConvertibleToDomainEntity<Pagamento>
 		this.valorPago = valorPago;
 		this.dataPagamento = dataPagamento;
 		this.promocao = promocao;
-	}
-
-	protected PagamentoJpaEntity(Long codigo, AssinaturaJpaEntity assinatura, Double valorPago, LocalDate dataPagamento, String promocao)
-	{
-		this
-		(
-				assinatura,
-				valorPago,
-				dataPagamento,
-				promocao
-		);
-		this.codigo = codigo;
 	}
 
 	protected PagamentoJpaEntity() {}

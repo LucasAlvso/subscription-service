@@ -1,6 +1,6 @@
-package org.projarq.application.use_cases.assinaturas.query_subscription;
+package org.projarq.application.use_cases.assinaturas;
 
-import org.projarq.domain.data_access.assinaturas.ESubscriptionStatusFilter;
+import org.projarq.domain.data_access.assinaturas.StatusAssinaturaFilter;
 import org.projarq.domain.entities.assinatura.Assinatura;
 import org.projarq.domain.data_access.assinaturas.BuscarAssinaturasDataAccess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ public class BuscarAssinaturas
 
 	public Optional<Assinatura> findAssinaturaById(long codAssinatura)
 	{
-		return buscarAssinaturasDataAccess.findById(codAssinatura);
+		return buscarAssinaturasDataAccess.getAssinaturaById(codAssinatura);
 	}
 
-	public List<Assinatura> findAllByFilter(ESubscriptionStatusFilter filter)
+	public List<Assinatura> findAllByFilter(StatusAssinaturaFilter filter)
 	{
 		return buscarAssinaturasDataAccess.getAssinaturas(filter);
 	}
