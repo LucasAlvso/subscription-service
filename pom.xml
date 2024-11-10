@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.projarq</groupId>
-    <artifactId>assinatura-service</artifactId>
+    <artifactId>subscription-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>subscription-service</name>
     <description>subscription-service</description>
@@ -72,6 +72,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>4.1.0</version>
         </dependency>
 
         <dependency>
