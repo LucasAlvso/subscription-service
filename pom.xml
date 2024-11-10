@@ -11,8 +11,8 @@
     <groupId>com.projarq</groupId>
     <artifactId>assinatura-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <nome>assinatura-service</nome>
-    <description>assinatura-service</description>
+    <name>subscription-service</name>
+    <description>subscription-service</description>
     <url/>
     <licenses>
         <license/>
